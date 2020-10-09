@@ -150,6 +150,23 @@ class CommuneController extends AbstractController
         return JsonResponse::fromJsonString($this->serializeJson($commune));
     }
 
+    /**
+     * @Route("/api/commune/delete", name="userDelete", methods={"DELETE"})
+     * @param Request $request
+     * @param CommuneRepository $communeRepository
+     * @return JsonResponse
+     */
+    public function communeDelete(Request $request, CommuneRepository $communeRepository)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $data = json_decode($request->getContent(),true);
+        $commune = $communeRepository->findOneBy(['id' => $data['id']]);
+
+        $em->remove($commune);
+        $em->flush();
+        return JsonResponse::fromJsonString($this->serializeJson($commune));
+    }
+
     private function serializeJson($objet)
     {
         $defaultContext = [
