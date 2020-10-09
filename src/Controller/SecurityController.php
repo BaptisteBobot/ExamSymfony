@@ -9,16 +9,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/security", name="security")
-     */
-    public function index()
-    {
-        return $this->render('security/index.html.twig', [
-            'controller_name' => 'SecurityController',
-        ]);
-    }
-
-    /**
      * @Route(name="api_login", path="/api/login_check")
      * @return JsonResponse
      */
